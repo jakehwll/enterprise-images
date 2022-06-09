@@ -9,7 +9,7 @@ on:
     branches:
       - main
 
-  schedule:
+  # schedule:
     # Re-build all images at 2am UTC every Monday (8pm CST/9pm CDT)
     #
     # This ensures we always start with a recent base image, which
@@ -20,7 +20,7 @@ on:
     # be buildable from source (no removed packages).
     #
     # See: https://crontab.guru/#0_2_*_*_1
-    - cron: "0 2 * * 1"
+    # - cron: "0 2 * * 1"
 
   workflow_dispatch:
 
@@ -52,7 +52,7 @@ jobs:
     strategy:
       matrix:
         job:
-          - centos
+          # - centos
           - ubuntu
       fail-fast: false
     name: build ${{ matrix.job}}
