@@ -70,7 +70,7 @@ jobs:
           - base
           - node
       fail-fast: false
-    name: images/${{ matrix.job}}
+    name: build ${{ matrix.job}}/${{ matrix.image }}
     steps:
       - name: Cancel previous runs
         if: github.event_name == 'pull_request'
