@@ -1,4 +1,4 @@
-FROM codercom/enterprise-base:ubuntu
+FROM $BASE_IMAGE:ubuntu
 
 # Run everything as root
 USER root
