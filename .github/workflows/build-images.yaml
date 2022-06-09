@@ -1,8 +1,8 @@
-name: build
+name: Build Images
 
 on:
   workflow_run:
-    workflows: [build]
+    workflows: [Build Base]
     types:
       - completed
 
