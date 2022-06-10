@@ -18,6 +18,10 @@ jobs:
         image:
           - node
           - golang
+          - java
+          - multieditor
+          - ruby
+          - vnc
       fail-fast: false
     name: build ${{ matrix.job }}/${{ matrix.image }}
     steps:

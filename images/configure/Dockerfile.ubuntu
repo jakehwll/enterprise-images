@@ -1,3 +1,4 @@
-FROM codercom/enterprise-base:ubuntu
+ARG AUTHOR
+FROM ghcr.io/${AUTHOR}:base-ubuntu
 
 COPY [ "configure", "/coder/configure" ]
