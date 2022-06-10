@@ -1,5 +1,5 @@
 ARG AUTHOR
-FROM ghcr.io/${AUTHOR}:base-ubuntu
+FROM ghcr.io/${AUTHOR}:ubuntu-base
 
 USER 0
 

@@ -8,7 +8,7 @@ New images should extend from existing images whenever possible, e.g.
 
 ```Dockerfile
 ARG AUTHOR
-FROM ghcr.io/${AUTHOR}:base-ubuntu
+FROM ghcr.io/${AUTHOR}:ubuntu-base
 
 # Rest of your image...
 ```
