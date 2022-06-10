@@ -56,5 +56,5 @@ jobs:
           docker buildx build --push \
           --file Dockerfile.${{ matrix.job }} \
           --tag $IMAGE_ID:${{ matrix.job }}-${{ matrix.image }} \
-          --build-arg AUTHOR="${{ github.repository }}"
+          --build-arg AUTHOR="${{ github.repository }}" \
           --platform linux/amd64,linux/arm/v7,linux/arm64 .
