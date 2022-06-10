@@ -2,7 +2,8 @@ name: Build Images
 
 on:
   workflow_run:
-    workflows: [Build Base]
+    workflows:
+      - Build Base
     types:
       - completed
 
@@ -18,7 +19,7 @@ jobs:
           - node
           - golang
       fail-fast: false
-    name: build ${{ matrix.job}}/${{ matrix.image }}
+    name: build ${{ matrix.job }}/${{ matrix.image }}
     steps:
       - name: Cancel previous runs
         if: github.event_name == 'pull_request'
@@ -55,4 +56,5 @@ jobs:
           docker buildx build --push \
           --file Dockerfile.${{ matrix.job }} \
           --tag $IMAGE_ID:${{ matrix.job }}-${{ matrix.image }} \
+          --build-arg AUTHOR="${{ github.repository }}"
           --platform linux/amd64,linux/arm/v7,linux/arm64 .
