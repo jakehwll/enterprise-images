@@ -1,4 +1,5 @@
-FROM codercom/enterprise-java:ubuntu
+ARG AUTHOR
+FROM ghcr.io/${AUTHOR}:ubuntu-java
 
 # Run everything as root
 USER root

@@ -1,4 +1,5 @@
-FROM codercom/enterprise-multieditor:ubuntu
+ARG AUTHOR
+FROM ghcr.io/${AUTHOR}:ubuntu-multieditor
 
 # Run everything as root
 USER root

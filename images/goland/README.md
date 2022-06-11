@@ -1,7 +1,5 @@
 # Enterprise GoLand
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-goland?label=codercom%2Fenterprise-goland)](https://hub.docker.com/r/codercom/enterprise-goland)
-
 ## Description
 
 Wraps [enterprise-golang](../golang/README.md) and includes

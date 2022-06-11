@@ -1,7 +1,5 @@
 # Enterprise IntelliJ
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-intellij?label=codercom%2Fenterprise-intellij)](https://hub.docker.com/r/codercom/enterprise-intellij)
-
 ## Description
 
 Wraps [enterprise-multieditor](../multieditor/README.md) with IntelliJ

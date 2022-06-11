@@ -1,7 +1,5 @@
 # Enterprise Multi Editor
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-multieditor?label=codercom%2Fenterprise-multieditor)](https://hub.docker.com/r/codercom/enterprise-multieditor)
-
 ## Description
 
 By default, Coder Enterprise supports

@@ -1,7 +1,5 @@
 # Enterprise PyCharm
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-pycharm?label=codercom%2Fenterprise-pycharm)](https://hub.docker.com/r/codercom/enterprise-pycharm)
-
 ## Description
 
 Wraps [enterprise-multieditor](../multieditor/README.md) with PyCharm

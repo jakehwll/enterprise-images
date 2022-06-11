@@ -1,0 +1,164 @@
+name: Build Children
+
+on:
+  workflow_run:
+    workflows:
+      - Build Images
+    types:
+      - completed
+
+  workflow_dispatch:
+
+jobs:
+  golang:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        job:
+          # - centos
+          - ubuntu
+        image:
+          - goland
+      fail-fast: false
+    name: build ${{ matrix.job }}/${{ matrix.image }}
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log-in to ghcr.io
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push the ${{ matrix.job }}/${{ matrix.image }} Docker Images.
+        working-directory: ./images/${{ matrix.image }}
+        env:
+          BASE_IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.job }}-base
+        run: |
+          IMAGE_ID=$(echo ghcr.io/${{ github.repository }} | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # when the branch is main, replace main with latest
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          # Build and Publish container image
+          docker buildx build --push \
+          --file Dockerfile.${{ matrix.job }} \
+          --tag $IMAGE_ID:${{ matrix.job }}-${{ matrix.image }} \
+          --build-arg AUTHOR="${{ github.repository }}" \
+          --platform linux/amd64,linux/arm/v7,linux/arm64 .
+
+  java:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        job:
+          # - centos
+          - ubuntu
+        image:
+          - android
+      fail-fast: false
+    name: build ${{ matrix.job }}/${{ matrix.image }}
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log-in to ghcr.io
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push the ${{ matrix.job }}/${{ matrix.image }} Docker Images.
+        working-directory: ./images/${{ matrix.image }}
+        env:
+          BASE_IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.job }}-base
+        run: |
+          IMAGE_ID=$(echo ghcr.io/${{ github.repository }} | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # when the branch is main, replace main with latest
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          # Build and Publish container image
+          docker buildx build --push \
+          --file Dockerfile.${{ matrix.job }} \
+          --tag $IMAGE_ID:${{ matrix.job }}-${{ matrix.image }} \
+          --build-arg AUTHOR="${{ github.repository }}" \
+          --platform linux/amd64,linux/arm/v7,linux/arm64 .
+
+  multieditor:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        job:
+          # - centos
+          - ubuntu
+        image:
+          - clion
+          - dataSpell
+          - pycharm
+          - webstorm
+      fail-fast: false
+    name: build ${{ matrix.job }}/${{ matrix.image }}
+    steps:
+      - name: Cancel previous runs
+        if: github.event_name == 'pull_request'
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log-in to ghcr.io
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push the ${{ matrix.job }}/${{ matrix.image }} Docker Images.
+        working-directory: ./images/${{ matrix.image }}
+        env:
+          BASE_IMAGE: ghcr.io/${{ github.repository }}/${{ matrix.job }}-base
+        run: |
+          IMAGE_ID=$(echo ghcr.io/${{ github.repository }} | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # when the branch is main, replace main with latest
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          # Build and Publish container image
+          docker buildx build --push \
+          --file Dockerfile.${{ matrix.job }} \
+          --tag $IMAGE_ID:${{ matrix.job }}-${{ matrix.image }} \
+          --build-arg AUTHOR="${{ github.repository }}" \
+          --platform linux/amd64,linux/arm/v7,linux/arm64 .

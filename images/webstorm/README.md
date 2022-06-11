@@ -1,7 +1,5 @@
 # Enterprise WebStorm
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-webstorm?label=codercom%2Fenterprise-webstorm)](https://hub.docker.com/r/codercom/enterprise-webstorm)
-
 ## Description
 
 Wraps [enterprise-multieditor](../multieditor/README.md) with WebStorm

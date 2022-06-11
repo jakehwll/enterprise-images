@@ -1,7 +1,5 @@
 # Enterprise Golang
 
-[![DockerPulls](https://img.shields.io/docker/pulls/codercom/enterprise-golang)](https://hub.docker.com/r/codercom/enterprise-golang)
-
 ## Description
 
 Wraps [enterprise-base](../base/README.md) with the basics for Go development.

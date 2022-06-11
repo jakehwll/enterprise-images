@@ -1,7 +1,5 @@
 # Enterprise CLion
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/codercom/enterprise-clion?label=codercom%2Fenterprise-clion)](https://hub.docker.com/r/codercom/enterprise-clion)
-
 ## Description
 
 Wraps [enterprise-multieditor](../multieditor/README.md) with CLion
